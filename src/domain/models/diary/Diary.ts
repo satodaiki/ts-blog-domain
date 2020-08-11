@@ -1,19 +1,19 @@
 import DiaryId from '@/domain/models/diary/DiaryId';
 import DiaryText from '@/domain/models/diary/DiaryText';
-import DiaryRegisteredDate from '@/domain/models/diary/DiaryRegisteredDate';
+import DiaryCreateDate from '@/domain/models/diary/DiaryCreateDate';
+import DiaryUpdateDate from '@/domain/models/diary//DiaryUpdateDate';
 
 class Diary {
     private id: DiaryId;
     private text?: DiaryText;
-    private registeredDate?: DiaryRegisteredDate;
+    private createDate?: DiaryCreateDate;
+    private updateDate?: DiaryUpdateDate;
 
-    public constructor(id: DiaryId) {
+    public constructor(id: DiaryId, text?: DiaryText, createDate?: DiaryCreateDate, updateDate?: DiaryUpdateDate) {
         this.id = id;
-    }
-
-    public regist(text: DiaryText, registeredDate: DiaryRegisteredDate) {
         this.text = text;
-        this.registeredDate = registeredDate;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
     }
 }
 

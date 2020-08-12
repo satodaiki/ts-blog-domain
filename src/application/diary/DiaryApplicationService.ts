@@ -22,6 +22,16 @@ class DiaryApplicationService {
         this.diaryRepository.save(diary);
     }
 
+    public delete(id: string): void {
+        const diaryId: DiaryId = new DiaryId(id);
+        const user = this.diaryRepository.find(diaryId);
+        console.log("find: ", user);
+
+        if (user === undefined) return;
+
+        this.diaryRepository.delete(user.id);
+    }
+
     public getAll(): Array<Diary> | undefined {
         return this.diaryRepository.findAll();
     }

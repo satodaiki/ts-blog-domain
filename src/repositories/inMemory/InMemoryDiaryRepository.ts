@@ -6,11 +6,19 @@ class InMemoryDiaryRepository implements IDiaryRepository {
     
     private data: Map<DiaryId, Diary> = new Map();
 
-    public find(diaryId: DiaryId): Diary {
-        return new Diary(diaryId);
+    public find(diaryId: DiaryId): Diary | undefined {
+        return this.data.get(diaryId);
+    }
+
+    public findAll(): Array<Diary> | undefined {
+        let allList = Array<Diary>();
+        this.data.forEach(v => allList.push(v));
+        return allList;
     }
 
     public save(diary: Diary): void {
-        return;
+        this.data.set(diary.id, diary);
     }
 }
+
+export default InMemoryDiaryRepository;

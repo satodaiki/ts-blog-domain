@@ -1,27 +1,28 @@
-import { v4 as uuidv4 } from 'uuid';
 import * as readline from 'readline';
-import Diary from '@/domain/models/diary/Diary';
-import DiaryId from '@/domain/models/diary/DiaryId';
-import DiaryText from '@/domain/models/diary/DiaryText';
-import DiaryCreateDate from '@/domain/models/diary/DiaryCreateDate';
+import InMemoryDiaryRepository from '@/repositories/inMemory/InMemoryDiaryRepository';
+import DiaryApplicationService from '@/application/diary/DiaryApplicationService';
 
-let diaries: Array<Diary> = new Array();
+const diaryService = new DiaryApplicationService(new InMemoryDiaryRepository());
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
-console.log("input diary text.");
+console.log("system start.");
+
 var reader = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 reader.on('line', (line) => {
-    if (line === "") reader.close();
-    const diaryId: DiaryId = new DiaryId(uuidv4());
-    const text = new DiaryText(line);
-    const now = new DiaryCreateDate(new Date());
-    diaries.push(new Diary(diaryId, text, now));
+    if (line === "exit") {
+      reader.close();
+    } else if (line === "print") {
+      const diaryList = diaryService.getAll();
+      console.log(diaryList);
+    } else {
+      diaryService.register(line);
+    }
 });
 reader.on('close', () => {
-    console.log(diaries);
+    console.log("system exit.");
 });

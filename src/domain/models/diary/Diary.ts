@@ -4,16 +4,20 @@ import DiaryCreateDate from '@/domain/models/diary/DiaryCreateDate';
 import DiaryUpdateDate from '@/domain/models/diary//DiaryUpdateDate';
 
 class Diary {
-    private id: DiaryId;
-    private text?: DiaryText;
-    private createDate?: DiaryCreateDate;
-    private updateDate?: DiaryUpdateDate;
+    private _id: DiaryId;
+    private _text?: DiaryText;
+    private _createDate?: DiaryCreateDate;
+    private _updateDate?: DiaryUpdateDate;
 
     public constructor(id: DiaryId, text?: DiaryText, createDate?: DiaryCreateDate, updateDate?: DiaryUpdateDate) {
-        this.id = id;
-        this.text = text;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
+        this._id = id;
+        this._text = text;
+        this._createDate = createDate;
+        this._updateDate = updateDate;
+    }
+
+    get id(): DiaryId {
+        return this._id;
     }
 }
 

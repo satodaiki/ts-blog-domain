@@ -4,10 +4,10 @@ class UserEmail {
         if (email.length === 0) {
             throw new Error('userName cannot be registered with zero length.');
         }
-        this._email = name;
+        this._email = email;
     }
 
-    public get email() {
+    public get value() {
         return this._email;
     }
 }

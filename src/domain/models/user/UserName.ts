@@ -7,7 +7,7 @@ class UserName {
         this._name = name;
     }
 
-    public get name() {
+    public get value() {
         return this._name;
     }
 }

@@ -4,6 +4,7 @@ import DiaryId from "@/domain/models/diary/DiaryId";
 import DiaryText from "@/domain/models/diary/DiaryText";
 import DiaryCreateDate from "@/domain/models/diary/DiaryCreateDate";
 import Diary from '@/domain/models/diary/Diary';
+import UserId from '@/domain/models/user/UserId';
 
 class DiaryApplicationService {
     private diaryRepository: IDiaryRepository;
@@ -12,12 +13,11 @@ class DiaryApplicationService {
         this.diaryRepository = diaryRepository;
     }
 
-    public register(text: string): void {
-        const diaryId: DiaryId = new DiaryId(uuidv4());
+    public register(text: string, userId?: UserId): void {
         const diaryText: DiaryText = new DiaryText(text);
         const diaryCreateDate: DiaryCreateDate = new DiaryCreateDate(new Date());
 
-        const diary = new Diary(diaryId, diaryText, diaryCreateDate);
+        const diary = new Diary(diaryText, userId, diaryCreateDate);
 
         this.diaryRepository.save(diary);
     }
@@ -25,7 +25,6 @@ class DiaryApplicationService {
     public delete(id: string): void {
         const diaryId: DiaryId = new DiaryId(id);
         const user = this.diaryRepository.find(diaryId);
-        console.log("find: ", user);
 
         if (user === undefined) return;
 

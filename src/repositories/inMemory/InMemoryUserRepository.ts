@@ -20,3 +20,5 @@ class InMemoryUserRepository implements IUserRepository {
         this.users.splice(targetIndex, 1);
     }
 }
+
+export default InMemoryUserRepository;

@@ -7,7 +7,7 @@ class UserId {
         this._id = id;
     }
 
-    public get id() {
+    public get value() {
         return this._id;
     }
 }
